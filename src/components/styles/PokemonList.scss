@@ -3,6 +3,12 @@
 	height: 100%;
 }
 
+.row {
+	// margin-left: 0px;
+	// margin-right: 0px;
+	justify-content: center;
+}
+
 .pokemon-list-container {
 	display: grid;
 	grid-template-columns: 250px 250px 250px 250px;
@@ -20,10 +26,18 @@
 	margin: 10px;
 
 	.pokemon-list-item {
+		background: #b2bed3;
+		border-radius: 20px;
+		border: solid 1px black;
+		padding: 20px;
+		padding-left: 35px;
+		padding-right: 35px;
 		position: relative;
+		height: 475px;
+		width: 250px;
 		img {
-			height: 110px !important;
-			background-color: cornflowerblue;
+			height: 130px !important;
+			background-color: #dee2e6;
 			border: solid 1px black;
 			border-radius: 20px;
 			padding: 40px;

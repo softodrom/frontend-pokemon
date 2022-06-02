@@ -1,20 +1,27 @@
 import React from "react";
+import axios from "axios";
 import "./styles/PokemonItem.scss";
+import AuthService from "../services/auth.service";
+import { computeHeadingLevel } from "@testing-library/react";
 
 const PokemonItem = ({ id, name, image, type, pokemon }) => {
+  const currentUser = AuthService.getCurrentUser();
+
+  const addToFavorites = (pokemon) => {
+    // console.log(pokemon.id);
+    // console.log(currentUser.id);
+    async function sendData() {
+      let res = await axios.post("http://127.0.0.1:8080/addFavorite", {
+        pokemonID: pokemon.id,
+        userId: currentUser.id,
+      });
+      // .then((response)  => this.setState({ articleId: response.data.id }));
+      // console.log(res);
+    }
+    sendData();
+  };
+
   return (
-    // <div className="col">
-    //   <div className="thump-container p-3">
-    //     <div className="number">
-    //       <small>#0{id}</small>
-    //     </div>
-    //     <img src={image} alt={name} className="pokemon-image" />
-    //     <div className="detail-wrapper">
-    //       <h3>{name}</h3>
-    //       <small>Type: {type}</small>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="pokemon-container">
       <div className="pokemon-list-item">
         <img
@@ -44,7 +51,15 @@ const PokemonItem = ({ id, name, image, type, pokemon }) => {
               })}
             </div>
           </div>
+          <div
+            className="ui button mt-5"
+            onClick={() => addToFavorites(pokemon)}
+          >
+            <i className="heart icon"></i> Like
+          </div>
+          <div className="ui button mt-2">More</div>
         </div>
+
         {/* <div className="pokemon-footer">
           <button
             className="see-details-button"

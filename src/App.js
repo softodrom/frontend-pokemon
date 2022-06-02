@@ -10,12 +10,10 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
-import Pokemon from "./components/Pokemon";
 import PokemonSearch from "./components/PokemonSearch";
 import Search from "./components/Search";
 import GuessTheName from "./components/GuessTheName";
-import PokemonList from "./components/PokemonList";
-// import "./components/styles/global.scss";
+import PokePagination from "./components/PokePagination";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -127,11 +125,10 @@ const App = () => {
           <Route path="/user" element={<BoardUser />} />
           {/* <Route path="/mod" element={<BoardModerator />} /> */}
           <Route path="/admin" element={<BoardAdmin />} />
-          <Route path="/pokemon" element={<Pokemon />} />
           <Route path="/pokemonsrc" element={<PokemonSearch />} />
           <Route path="/search" element={<Search />} />
           <Route path="/guess" element={<GuessTheName />} />
-          <Route path="/list" element={<PokemonList />} />
+          <Route path="/list" element={<PokePagination />} />
           {/* <Route path="/test" element={<Test />} /> */}
         </Routes>
       </div>
