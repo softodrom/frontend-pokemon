@@ -14,6 +14,7 @@ import PokemonSearch from "./components/PokemonSearch";
 import Search from "./components/Search";
 import GuessTheName from "./components/GuessTheName";
 import PokePagination from "./components/PokePagination";
+import PokemonMore from "./components/PokemonMore";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -123,12 +124,14 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/user" element={<BoardUser />} />
-          {/* <Route path="/mod" element={<BoardModerator />} /> */}
+          <Route path="/more" element={<PokemonMore />} />
           <Route path="/admin" element={<BoardAdmin />} />
           <Route path="/pokemonsrc" element={<PokemonSearch />} />
           <Route path="/search" element={<Search />} />
           <Route path="/guess" element={<GuessTheName />} />
           <Route path="/list" element={<PokePagination />} />
+          <Route path="/mod" element={<BoardModerator />} />
+          {/* <Route path="/more" element={<PokemonMore />} /> */}
           {/* <Route path="/test" element={<Test />} /> */}
         </Routes>
       </div>

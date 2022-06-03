@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AuthService from "../services/auth.service";
 import "./Search.css";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
+  const navigate = useNavigate();
   const [name, setname] = useState("");
   const [Find, setFind] = useState("pikachu");
   const [Img, setImg] = useState("");
   const [Type, setType] = useState("");
   const [Pokemon, setPokemon] = useState("");
   const currentUser = AuthService.getCurrentUser();
+
+  const getMoreInfo = () => {
+    // console.log(currentPokemon);
+      navigate("/more", { state: { pokemon: Pokemon } });
+  };
 
   useEffect(() => {
     async function getData() {
@@ -82,7 +89,9 @@ const Search = () => {
         <div className="ui button mt-5" onClick={() => addToFavorites(Pokemon)}>
           <i className="heart icon"></i> Like
         </div>
-        <div className="ui button mt-2">More</div>
+        <div className="ui button mt-2" onClick={() => getMoreInfo()}>
+            More
+          </div>
       </div>
     </div>
   );

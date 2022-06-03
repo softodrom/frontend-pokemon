@@ -2,18 +2,31 @@ import React, { useState, useEffect } from "react";
 import PokemonItem from "./PokemonItem";
 import _ from "lodash";
 import "./styles/PokemonList.scss";
+import AuthService from "../services/auth.service";
+import axios from "axios";
 
 const PokePagination = () => {
   const [post, setPost] = useState([]);
   const [number, setNumber] = useState(1); // No of pages
   const [postPerPage] = useState(20);
+  const [favorites, setFavorites] = useState([]);
+  const currentUser = AuthService.getCurrentUser();
 
   useEffect(() => {
+    getFavorites();
     getAllPokemons();
   }, []);
 
+  const getFavorites = async () => {
+    let res = await axios
+      .get(`http://127.0.0.1:8080/getFavById?id=${currentUser.id}`)
+      .catch(console.error);
+    // console.log(res.data);
+    setFavorites(res.data);
+  };
+
   const getAllPokemons = async () => {
-    const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=400");
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=300");
     const data = await res.json();
 
     function createPokemonObject(results) {
@@ -75,11 +88,32 @@ const PokePagination = () => {
           </div>
 
           <div className="pokemon-list-container">
-            {chunk1.map((test, index) => (
-              <div className="row">
-                {test.map((pokemonStats, index) => (
-                  <PokemonItem key={index} pokemon={pokemonStats} />
-                ))}
+            {chunk1.map((pokemons, index) => (
+              <div key={index} className="row">
+                {pokemons.map((pokemon, index) => {
+                  // console.log(favorites);
+                  const isFavorite = favorites.some((fav) => {
+                    // console.log(fav.pokemonID === pokemon.id);
+                    return fav.pokemonID === pokemon.id;
+                  });
+                  return (
+                    // <PokemonItem
+                    //   isFavorite={isFavorite}
+                    //   key={index}
+                    //   pokemon={pokemon}
+                    // />
+
+                    <PokemonItem
+                      isFavorite={isFavorite}
+                      key={index}
+                      id={pokemon.id}
+                      image={pokemon.sprites.other.dream_world.front_default}
+                      name={pokemon.name}
+                      type={pokemon.types[0].type.name}
+                      pokemon={pokemon}
+                    />
+                  );
+                })}
               </div>
             ))}
           </div>
